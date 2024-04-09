@@ -1,26 +1,36 @@
-import React, {useState}from "react";
+import React, {useState} from "react";
 
 //create your first component
 const Home = () => {
 
-	const [todo, setTodo] = useState("")
+	const [inputValue, setInputValue] = useState("")
+	const [todos, setTodos] = useState([]);
+
 	return (
-		<div className="text-center mt-5 container">
-			<div className="input-group mb-3">
-				<div className="input-group-pretend">
-					<span className="input-group-text" id="basic-addon1">To Do</span>
-				</div>
-				<input type="text" className="form-control" placeholder="Ingrese una Tarea" 
-					aria-label="Username" aria-describedby="basic-addon1"
-					value={todo}
-					onChange={(e) =>{
-						setTodo(e.target.value);
-					}}></input>
-				<h3>El To Do es: <br>{todo}</br></h3>
-				<button className="btn btn-danger" onClick={() => {
-					setTodo("")
-				}}>Clear</button>
-			</div>
+		<div className="container">
+			<h3>To Do List</h3>
+			<ul>
+				<li>
+					<input
+						type="text"
+						onChange={(e) => setInputValue(e.target.value)}
+						value={inputValue}
+						onKeyDown={(enter) => {
+							if (enter.key == "Enter"){
+								setTodos(todos.concat([inputValue]));
+								setInputValue("");
+							}
+						}}
+						placeholder="What do you need to do"></input>
+				</li>
+					{todos.map((item, index) => (
+						<li>
+							{item} <i class="fa-solid fa-xmark" 
+							onClick={()=> setTodos(todos.filter((t, currentIndex) => index != currentIndex))}></i>
+						</li>
+					))}
+			</ul>
+			<div>{todos.length} Task</div>
 		</div>
 	);
 };
