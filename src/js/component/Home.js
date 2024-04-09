@@ -25,12 +25,12 @@ const Home = () => {
 				</li>
 					{todos.map((item, index) => (
 						<li>
-							{item} <i class="fa-solid fa-xmark" 
+							{item}<i class="fa-solid fa-xmark" 
 							onClick={()=> setTodos(todos.filter((t, currentIndex) => index != currentIndex))}></i>
 						</li>
 					))}
 			</ul>
-			<div>{todos.length} Task</div>
+			<div>{todos.length} <strong></strong>Task</div>
 		</div>
 	);
 };
