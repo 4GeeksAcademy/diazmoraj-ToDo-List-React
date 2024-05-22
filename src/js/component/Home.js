@@ -17,14 +17,17 @@ const Home = () => {
 						value={inputValue}
 						onKeyDown={(enter) => {
 							if (enter.key == "Enter"){
-								setTodos(todos.concat([inputValue]));
-								setInputValue("");
+								if
+									(inputValue.trim() !==""){
+										setTodos(todos.concat([inputValue.trim()]));
+										setInputValue("");
+									}
 							}
 						}}
 						placeholder="What do you need to do"></input>
 				</li>
 					{todos.map((item, index) => (
-						<li>
+						<li className="d-flex justify-content-between">
 							{item}<i class="fa-solid fa-xmark" 
 							onClick={()=> setTodos(todos.filter((t, currentIndex) => index != currentIndex))}></i>
 						</li>
